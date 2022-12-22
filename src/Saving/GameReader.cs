@@ -64,13 +64,13 @@ namespace BattleBoats.Saving
 
 		private BoatPart ReadBoatPart(BinaryReader br)
 		{
-			BoatPart.Status state = (BoatPart.Status)br.ReadInt32();
+			bool hit = br.ReadBoolean();
 			int x = br.ReadInt32();
 			int y = br.ReadInt32();
 
 			return new BoatPart(new Coordinates(x, y))
 			{
-				State = state
+				Hit = hit
 			};
 		}
 

@@ -36,9 +36,10 @@ namespace BattleBoats.Game
 			TotalTriedMoves.Add(move);
 
 			BoatPart? part = GetBoatPartAt(move.Coords);
+			
 			if (part != null)
 			{
-				part.State = BoatPart.Status.HIT;
+				part.Hit = true;
 				move.SuccessfulHit = true;
 			}
 		}
@@ -138,7 +139,7 @@ namespace BattleBoats.Game
 			{
 				foreach (var part in boat.Parts)
 				{
-					Coordinates pCoord = boat.Coords + part.Coords;
+					Coordinates pCoord = boat.Coords + part.LocalCoords;
 
 					if (pCoord == coords)
 						return part;

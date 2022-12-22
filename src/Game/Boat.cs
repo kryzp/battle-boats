@@ -6,20 +6,14 @@ namespace BattleBoats.Game
 	 */
 	public class BoatPart
 	{
-		public enum Status
-		{
-			OK,
-			HIT
-		}
-
-		public Status State;
-		public Coordinates Coords;
+		public bool Hit;
+		public Coordinates LocalCoords;
 		public Boat Parent;
 
-		public BoatPart(Coordinates coords)
+		public BoatPart(Coordinates localCoords)
 		{
-			this.State = Status.OK;
-			this.Coords = coords;
+			this.Hit = false;
+			this.LocalCoords = localCoords;
 		}
 
 		public bool IsDestroyed() => this.Parent.IsDestroyed();
@@ -43,12 +37,12 @@ namespace BattleBoats.Game
 		 * Checks if each part was hit.
 		 * If so, the boat is entirely destroyed.
 		 */
-		public bool IsDestroyed() => Parts.All(part => part.State == BoatPart.Status.HIT);
+		public bool IsDestroyed() => Parts.TrueForAll(part => part.Hit);
 
 		/*
 		 * "Turns" (or "flips") the boat by flipping each parts' X and Y coordinates.
 		 */
-		public void Turn() => Parts.ForEach(p => (p.Coords.X, p.Coords.Y) = (p.Coords.Y, p.Coords.X));
+		public void Turn() => Parts.ForEach(p => (p.LocalCoords.X, p.LocalCoords.Y) = (p.LocalCoords.Y, p.LocalCoords.X));
 
 		/*
 		 * Checks if the boat is in an invalid position.
@@ -59,7 +53,7 @@ namespace BattleBoats.Game
 			
 			foreach (BoatPart part in Parts)
 			{
-				Coordinates partCoords = new Coordinates(part.Coords.X, part.Coords.Y) + coord;
+				Coordinates partCoords = new Coordinates(part.LocalCoords.X, part.LocalCoords.Y) + coord;
 
 				if (partCoords.X < 0 || partCoords.X >= Board.SIZE ||
 				    partCoords.Y < 0 || partCoords.Y >= Board.SIZE)
@@ -85,7 +79,7 @@ namespace BattleBoats.Game
 				{
 					foreach (BoatPart otherPart in otherBoat.Parts)
 					{
-						if ((otherBoat.Coords + otherPart.Coords) == (coord + part.Coords))
+						if ((otherBoat.Coords + otherPart.LocalCoords) == (coord + part.LocalCoords))
 							return true;
 					}
 				}

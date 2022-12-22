@@ -45,9 +45,9 @@ namespace BattleBoats.Saving
 
 		private void WriteBoatPart(BinaryWriter bw, BoatPart part)
 		{
-			bw.Write((int)part.State);
-			bw.Write(part.Coords.X);
-			bw.Write(part.Coords.Y);
+			bw.Write(part.Hit);
+			bw.Write(part.LocalCoords.X);
+			bw.Write(part.LocalCoords.Y);
 		}
 
 		private void WriteMove(BinaryWriter bw, HitMove move)

@@ -61,7 +61,7 @@ namespace BattleBoats.Game
 				foreach (BoatPart part in PreviewBoat.Parts)
 				{
 					boatImg.DrawChar(
-						new Coordinates(part.Coords.X * 2, part.Coords.Y),
+						new Coordinates(part.LocalCoords.X * 2, part.LocalCoords.Y),
 						new ColouredChar('@', ConsoleColor.DarkGreen)
 					);
 				}
