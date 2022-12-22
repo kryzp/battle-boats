@@ -147,8 +147,12 @@ namespace BattleBoats.State
 				Program.PopupError("You must answer [Y]es/[n]o for whether you want the second player to be an AI!");
 				return true;
 			}
-			
-			// todo: check if save file is duplicate
+
+			if (Program.SaveManager.DoesSaveFileExist(saveFileNameInputBox.Text))
+			{
+				Program.PopupError("That save file already exists!");
+				return true;
+			}
 			
 			return false;
 		}

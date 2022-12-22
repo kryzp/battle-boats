@@ -31,6 +31,22 @@ namespace BattleBoats.Saving
 		}
 		
 		/*
+		 * Checks if given save file already exists.
+		 */
+		public bool DoesSaveFileExist(string saveFileName)
+		{
+			var files = Directory.GetFiles("SAVES/");
+			
+			foreach (var file in files)
+			{
+				if (file == "SAVES/" + saveFileName + ".bbsave")
+					return true;
+			}
+
+			return false;
+		}
+		
+		/*
 		 * Archives the game.
 		 */
 		public void Archive()
