@@ -42,7 +42,7 @@ namespace BattleBoats
 			if (CurrentState == PlayingState.PLACING_FLEET)
 			{
 				PlaceMove? m = null;
-
+				
 				if ((m = GetCurrentPlayer().UpdatePlaceBoats()) != null)
 				{
 					GetCurrentPlayer().Board.AddBoats(m.Boats);

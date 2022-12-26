@@ -40,7 +40,7 @@ namespace BattleBoats.Player
 				
 				placeMove.Boats.Add((boatCoord, boat));
 			}
-
+			
 			// move to next turn
 			Program.GameManager.StartNextTurn();
 

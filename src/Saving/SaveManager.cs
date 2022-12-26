@@ -119,13 +119,16 @@ namespace BattleBoats.Saving
 				Program.GameManager.PlayerOne.Name = data.PlayerOneName;
 				Program.GameManager.PlayerOne.Board.Boats = data.PlayerOneBoats;
 				Program.GameManager.PlayerOne.Board.TotalTriedMoves = data.PlayerTwoMoves;
+				((RealPlayer)Program.GameManager.PlayerOne).PostLoadFromFile();
 
 				// player two
 				Program.GameManager.PlayerTwo = data.IsPlayerTwoAI ? new AIPlayer() : new RealPlayer();
 				Program.GameManager.PlayerTwo.Name = data.PlayerTwoName;
 				Program.GameManager.PlayerTwo.Board.Boats = data.PlayerTwoBoats;
 				Program.GameManager.PlayerTwo.Board.TotalTriedMoves = data.PlayerOneMoves;
-				
+				if (Program.GameManager.PlayerTwo is RealPlayer playerTwoReal)
+					playerTwoReal.PostLoadFromFile();
+
 				// turn off selection markers if currently playing
 				if (Program.GameManager.CurrentState == GameManager.PlayingState.PLAYING)
 				{

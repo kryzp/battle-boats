@@ -50,9 +50,12 @@ namespace BattleBoats.State
 			// draw who's turn it is
 			header.DrawText($"It is currently {Program.GameManager.GetCurrentPlayer().Name}'s turn", ConsoleColor.White, new Coordinates(2, 1));
 			
+			if (Program.GameManager.CurrentState == GameManager.PlayingState.PLACING_FLEET)
+				header.DrawText($"You can press C to clear all your placed boats.", ConsoleColor.Cyan, new Coordinates(2, 2));
+			
 			// draw last moves
-			header.DrawText("1ST LAST MOVE: " + Program.GameManager.LastMoveMessage, ConsoleColor.White, new Coordinates(Program.WINDOW_WIDTH * 1/3 + 3, 1));
-			header.DrawText("2ND LAST MOVE: " + Program.GameManager.LastLastMoveMessage, ConsoleColor.White, new Coordinates(Program.WINDOW_WIDTH * 1/3 + 3, 2));
+			header.DrawText("1ST LAST MOVE: " + Program.GameManager.LastMoveMessage, ConsoleColor.White, new Coordinates(Program.WINDOW_WIDTH * 1/2 + 3, 1));
+			header.DrawText("2ND LAST MOVE: " + Program.GameManager.LastLastMoveMessage, ConsoleColor.White, new Coordinates(Program.WINDOW_WIDTH * 1/2 + 3, 2));
 			
 			Program.Renderer.PushImage(header, Coordinates.ORIGIN, 2, true);
 		}
@@ -69,25 +72,25 @@ namespace BattleBoats.State
 					new Coordinates(Program.WINDOW_WIDTH, 4),
 					new ColouredChar(Characters.HORI_BOX, ConsoleColor.DarkGray)
 				).DrawLine(
-					new Coordinates(Program.WINDOW_WIDTH * 1/3, 0),
-					new Coordinates(Program.WINDOW_WIDTH * 1/3, 4),
+					new Coordinates(Program.WINDOW_WIDTH * 1/2, 0),
+					new Coordinates(Program.WINDOW_WIDTH * 1/2, 4),
 					new ColouredChar(Characters.VERT_BOX, ConsoleColor.DarkGray)
 				).DrawLine(
 					new Coordinates(Program.WINDOW_WIDTH * 1/2, 4),
 					new Coordinates(Program.WINDOW_WIDTH * 1/2, Program.WINDOW_HEIGHT - 2),
 					new ColouredChar(Characters.VERT_BOX, ConsoleColor.DarkGray)
 				).DrawChar(
-					new Coordinates(Program.WINDOW_WIDTH * 1/3, 4),
-					new ColouredChar(Characters.SPLIT_UP, ConsoleColor.DarkGray)
-				).DrawChar(
 					new Coordinates(Program.WINDOW_WIDTH * 1/2, 4),
 					new ColouredChar(Characters.SPLIT_DOWN, ConsoleColor.DarkGray)
+				).DrawChar(
+					new Coordinates(Program.WINDOW_WIDTH * 1/2, 4),
+					new ColouredChar(Characters.SPLIT_CENTRE, ConsoleColor.DarkGray)
 				).DrawChar(
 					new Coordinates(Program.WINDOW_WIDTH * 1/2, Program.WINDOW_HEIGHT - 2),
 					new ColouredChar(Characters.SPLIT_UP, ConsoleColor.DarkGray)
 				);
 
-				Program.Renderer.PushImage(borderImage, Coordinates.ORIGIN, 5);
+				Program.Renderer.PushImage(borderImage, Coordinates.ORIGIN, 6);
 			}
 		}
 		

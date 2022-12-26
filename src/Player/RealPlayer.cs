@@ -17,6 +17,15 @@ namespace BattleBoats.Player
 			boatsToPlace = GetInitialBoats();
 			SelectionMarker = new SelectionMarker() { PreviewBoat = GetBoatBeingPlaced() };
 		}
+
+		public void PostLoadFromFile()
+		{
+			// remove already existing boats
+			foreach (var boat in Board.Boats)
+				boatsToPlace.RemoveAll(b => b.Parts.Count == boat.Parts.Count);
+
+			SelectionMarker.PreviewBoat = GetBoatBeingPlaced();
+		}
 		
 		public override PlaceMove? UpdatePlaceBoats()
 		{
@@ -29,6 +38,14 @@ namespace BattleBoats.Player
 			if (Input.IsPressed(ConsoleKey.Z))
 				GetBoatBeingPlaced()?.Turn();
 
+			// clear boats
+			if (Input.IsPressed(ConsoleKey.C))
+			{
+				Board.Boats.Clear();
+				boatsToPlace = GetInitialBoats();
+				SelectionMarker.PreviewBoat = GetBoatBeingPlaced();
+			}
+			
 			// check if place key is pressed and if so place down boat and move to next boat
 			if (Input.IsPressed(ConsoleKey.Spacebar) && boatsToPlace.Count > 0)
 			{

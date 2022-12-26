@@ -17,5 +17,6 @@ namespace BattleBoats
 		public const char SPLIT_DOWN = '╦';
 		public const char SPLIT_LEFT = '╣';
 		public const char SPLIT_RIGHT = '╠';
+		public const char SPLIT_CENTRE = '╬';
 	}
 }

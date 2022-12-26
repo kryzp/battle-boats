@@ -177,7 +177,7 @@ namespace BattleBoats
 					
 					// initialize new state
 					CurrentState.Init();
-					
+
 					// first frame of new state
 					firstframe = true;
 				}

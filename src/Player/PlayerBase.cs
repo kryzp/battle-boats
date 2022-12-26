@@ -15,7 +15,7 @@ namespace BattleBoats.Player
 		
 		public readonly Board Board;
 		public string Name;
-
+		
 		public PlayerBase()
 		{
 			this.Board = new Board();
