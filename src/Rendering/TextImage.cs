@@ -159,8 +159,14 @@ namespace BattleBoats.Rendering
                 {
                     var cc = Chars[y][x];
 
-					if (cc.Char != ' ' || overrideEverything)
-						other.Chars[y + coords.Y][x + coords.X] = cc;
+                    int px = x + coords.X;
+                    int py = y + coords.Y;
+
+                    bool pxInRange = px >= 0 && px < other.Chars[y].Count;
+                    bool pyInRange = py >= 0 && py < other.Chars.Count;
+
+					if ((cc.Char != ' ' || overrideEverything) && pxInRange && pyInRange)
+						other.Chars[py][px] = cc;
                 }
             }
         }
