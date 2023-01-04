@@ -151,6 +151,20 @@ namespace BattleBoats.Rendering
 			}
 		}
 
+		public void DrawTo(TextImage other, Coordinates coords, bool overrideEverything = false)
+		{
+            for (int y = 0; y < Chars.Count; y++)
+            {
+                for (int x = 0; x < Chars[y].Count; x++)
+                {
+                    var cc = Chars[y][x];
+
+					if (cc.Char != ' ' || overrideEverything)
+						other.Chars[y + coords.Y][x + coords.X] = cc;
+                }
+            }
+        }
+
 		private void TryResizeUp(int w, int h)
 		{
 			int initialHeight = Height;

@@ -13,10 +13,18 @@ namespace BattleBoats.Rendering
 		
 		public static void Write(int x, int y, char c, ConsoleColor fg, ConsoleColor bg = ConsoleColor.Black)
 		{
-			Console.ForegroundColor = fg;
-			Console.BackgroundColor = bg;
+			if (fg != ConsoleColor.White && c != ' ')
+            {
+                Console.ForegroundColor = fg;
+                Console.BackgroundColor = bg;
+            }
+			
 			Write(x, y, c);
-			Console.ResetColor();
+
+            if (fg != ConsoleColor.White && c != ' ')
+            {
+                Console.ResetColor();
+            }
 		}
 	}
 }

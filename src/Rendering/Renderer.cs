@@ -22,9 +22,12 @@ namespace BattleBoats.Rendering
 		// holds all of the parts we need to draw this frame
 		private List<RenderPass> imageStack;
 
+		private TextImage fbo;
+
 		public Renderer()
 		{
 			imageStack = new List<RenderPass>();
+			fbo = new TextImage(Program.WINDOW_WIDTH, Program.WINDOW_HEIGHT);
 		}
 
 		/*
@@ -50,7 +53,7 @@ namespace BattleBoats.Rendering
 			{
 				for (int x = 0; x < Program.WINDOW_WIDTH; x++)
 				{
-					DrawUtils.Write(x, y, ' ');
+					fbo.Chars[y][x] = new ColouredChar(' ', ConsoleColor.White);
 				}
 			}
 		}
@@ -64,10 +67,12 @@ namespace BattleBoats.Rendering
 
 			foreach (var p in imageStack)
 			{
-				p.TextImage.Draw(p.Coords, p.OverrideEverything);
-			}
-			
-			imageStack.Clear();
+				p.TextImage.DrawTo(fbo, p.Coords, p.OverrideEverything);
+            }
+
+            imageStack.Clear();
+
+            fbo.Draw(Coordinates.ORIGIN, true);
 		}
 	}
 }
