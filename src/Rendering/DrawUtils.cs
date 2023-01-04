@@ -20,11 +20,6 @@ namespace BattleBoats.Rendering
             }
 			
 			Write(x, y, c);
-
-            if (fg != ConsoleColor.White && c != ' ')
-            {
-                Console.ResetColor();
-            }
 		}
 	}
 }
