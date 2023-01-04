@@ -138,7 +138,7 @@ namespace BattleBoats
 			while (ProgramRunning)
 			{
 				// draw loading bar for cool effect
-				if (lb.Progress < 92f && false) // 92f not 100f because of floating point precision errors, leading to some computers resetting the loading bar back to zero since cos() is a periodic function.
+				if (lb.Progress < 92f) // 92f not 100f because of floating point precision errors, leading to some computers resetting the loading bar back to zero since cos() is a periodic function.
 				{
 					// (1 - cos(f)) / 2 is a function that smoothly interpolates from 0 to 1 via use of the cosine function. I just found this through toying around in desmos.
 					lb.Run(new Coordinates((WINDOW_WIDTH / 2) - 25, WINDOW_HEIGHT / 2), 50, f => (0.5f * (1f - MathF.Cos(f))) * 100f, 750);
