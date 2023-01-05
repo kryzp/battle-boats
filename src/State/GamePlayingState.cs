@@ -15,8 +15,6 @@ namespace BattleBoats.State
 
 		public override void Update()
 		{
-			var mgr = Program.GameManager;
-			
 			// check for quit
 			if (Input.IsPressed(ConsoleKey.Q))
 			{
@@ -29,9 +27,12 @@ namespace BattleBoats.State
 			}
 			
 			// update the game
-			mgr.Update();
+			Program.GameManager.Update();
 		}
 
+		/*
+		 * Draw all of the individual "components" of the user interface / look of the game.
+		 */
 		public override void Draw()
 		{
 			DrawHeader();
@@ -49,9 +50,17 @@ namespace BattleBoats.State
 			
 			// draw who's turn it is
 			header.DrawText($"It is currently {Program.GameManager.GetCurrentPlayer().Name}'s turn", ConsoleColor.White, new Coordinates(2, 1));
-			
+
 			if (Program.GameManager.CurrentState == GameManager.PlayingState.PLACING_FLEET)
-				header.DrawText($"You can press C to clear all your placed boats.", ConsoleColor.Cyan, new Coordinates(2, 2));
+			{
+				header.DrawText($"Press C to clear all your placed boats.", ConsoleColor.Cyan, new Coordinates(2, 2));
+				header.DrawText($"Press Z to rotate your current boat.", ConsoleColor.Cyan, new Coordinates(2, 3));
+				header.DrawText($"Press SPACE to place your current boat.", ConsoleColor.Cyan, new Coordinates(2, 4));
+			}
+			else
+			{
+				header.DrawText($"Press SPACE to hit the enemy board!", ConsoleColor.Cyan, new Coordinates(2, 2));
+			}
 			
 			// draw last moves
 			header.DrawText("1ST LAST MOVE: " + Program.GameManager.LastMoveMessage, ConsoleColor.White, new Coordinates(Program.WINDOW_WIDTH * 1/2 + 3, 1));
@@ -65,33 +74,33 @@ namespace BattleBoats.State
 		 */
 		private void DrawBorders()
 		{
-			// draw actual borders
-			{
-				TextImage borderImage = new TextImage().DrawLine(
-					new Coordinates(0, 4),
-					new Coordinates(Program.WINDOW_WIDTH, 4),
-					new ColouredChar(Characters.HORI_BOX, ConsoleColor.DarkGray)
-				).DrawLine(
-					new Coordinates(Program.WINDOW_WIDTH * 1/2, 0),
-					new Coordinates(Program.WINDOW_WIDTH * 1/2, 4),
-					new ColouredChar(Characters.VERT_BOX, ConsoleColor.DarkGray)
-				).DrawLine(
-					new Coordinates(Program.WINDOW_WIDTH * 1/2, 4),
-					new Coordinates(Program.WINDOW_WIDTH * 1/2, Program.WINDOW_HEIGHT - 2),
-					new ColouredChar(Characters.VERT_BOX, ConsoleColor.DarkGray)
-				).DrawChar(
-					new Coordinates(Program.WINDOW_WIDTH * 1/2, 4),
-					new ColouredChar(Characters.SPLIT_DOWN, ConsoleColor.DarkGray)
-				).DrawChar(
-					new Coordinates(Program.WINDOW_WIDTH * 1/2, 4),
-					new ColouredChar(Characters.SPLIT_CENTRE, ConsoleColor.DarkGray)
-				).DrawChar(
-					new Coordinates(Program.WINDOW_WIDTH * 1/2, Program.WINDOW_HEIGHT - 2),
-					new ColouredChar(Characters.SPLIT_UP, ConsoleColor.DarkGray)
-				);
+			int headerHeight = (Program.GameManager.CurrentState == GameManager.PlayingState.PLAYING) ? 4 : 6;
+			
+			TextImage borderImage = new TextImage(
+			).DrawLine(
+				new Coordinates(0, headerHeight),
+				new Coordinates(Program.WINDOW_WIDTH, headerHeight),
+				new ColouredChar(Characters.HORI_BOX, ConsoleColor.DarkGray)
+			).DrawLine(
+				new Coordinates(Program.WINDOW_WIDTH / 2, 0),
+				new Coordinates(Program.WINDOW_WIDTH / 2, headerHeight),
+				new ColouredChar(Characters.VERT_BOX, ConsoleColor.DarkGray)
+			).DrawLine(
+				new Coordinates(Program.WINDOW_WIDTH / 2, headerHeight),
+				new Coordinates(Program.WINDOW_WIDTH / 2, Program.WINDOW_HEIGHT - 2),
+				new ColouredChar(Characters.VERT_BOX, ConsoleColor.DarkGray)
+			).DrawChar(
+				new Coordinates(Program.WINDOW_WIDTH / 2, headerHeight),
+				new ColouredChar(Characters.SPLIT_DOWN, ConsoleColor.DarkGray)
+			).DrawChar(
+				new Coordinates(Program.WINDOW_WIDTH / 2, headerHeight),
+				new ColouredChar(Characters.SPLIT_CENTRE, ConsoleColor.DarkGray)
+			).DrawChar(
+				new Coordinates(Program.WINDOW_WIDTH / 2, Program.WINDOW_HEIGHT - 2),
+				new ColouredChar(Characters.SPLIT_UP, ConsoleColor.DarkGray)
+			);
 
-				Program.Renderer.PushImage(borderImage, Coordinates.ORIGIN, 6);
-			}
+			Program.Renderer.PushImage(borderImage, Coordinates.ORIGIN, 6);
 		}
 		
 		/*

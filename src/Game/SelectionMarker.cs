@@ -73,14 +73,12 @@ namespace BattleBoats.Game
 				Program.Renderer.PushImage(boatImg,  GetDrawCoords(boardCoord), 6);
 				
 				// draw label / name
-				{
-					Program.Renderer.PushImage(
-						new TextImage().DrawText(GetPreviewBoatName(), ConsoleColor.Cyan),
-						GetDrawCoords(boardCoord) + new Coordinates(-GetPreviewBoatName().Length / 2, -2),
-						10,
-						true
-					);
-				}
+				Program.Renderer.PushImage(
+					new TextImage().DrawText(GetPreviewBoatName(), ConsoleColor.Cyan),
+					GetDrawCoords(boardCoord) + new Coordinates(-GetPreviewBoatName().Length / 2, -2),
+					10,
+					true
+				);
 			}
 		}
 

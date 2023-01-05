@@ -2,9 +2,6 @@ namespace BattleBoats.Rendering
 {
 	public static class DrawUtils
 	{
-		private static ConsoleColor lastFg;
-		private static ConsoleColor lastBg;
-
 		public static void Write(int x, int y, char c)
 		{
 			if (x < 0 || x >= Program.WINDOW_WIDTH || y < 0 || y >= Program.WINDOW_HEIGHT)
@@ -14,22 +11,10 @@ namespace BattleBoats.Rendering
 			Console.Write(c.ToString());
 		}
 		
-		public static void Write(int x, int y, char c, ConsoleColor fg, ConsoleColor bg = ConsoleColor.Black)
+		public static void Write(int x, int y, char c, ConsoleColor col)
 		{
 			if (c != ' ')
-			{
-				if (fg != lastFg)
-				{
-					Console.ForegroundColor = fg;
-					lastFg = fg;
-				}
-
-				if (bg != lastBg)
-				{
-					Console.BackgroundColor = bg;
-					lastBg = bg;
-				}
-			}
+				Console.ForegroundColor = col;
 
 			Write(x, y, c);
 		}

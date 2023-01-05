@@ -12,7 +12,7 @@ namespace BattleBoats.State
 		{
 			menu = new Menu();
 
-			menu.Add(new TextBox(new Coordinates(0, 0), (Program.WINDOW_WIDTH, Program.WINDOW_HEIGHT - 1))
+			menu.Add(new TextBox(Coordinates.ORIGIN, (Program.WINDOW_WIDTH, Program.WINDOW_HEIGHT - 1))
 			{
 				Text = "Welcome to BattleBoats (tm), the greatest game ever made according to Albert Einstein, Stephen\n" +
 				       "Hawking and some other guy we asked on the street.\n" +

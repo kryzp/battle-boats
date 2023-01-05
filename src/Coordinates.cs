@@ -16,7 +16,7 @@ namespace BattleBoats
 
 		public string ToNumChar()
 		{
-			return $"{(char)('A' + X)}, {Y+1}";
+			return $"{(char)('A'+X)}, {Y+1}";
 		}
 		
 		public static Coordinates operator + (Coordinates lhs, Coordinates rhs)

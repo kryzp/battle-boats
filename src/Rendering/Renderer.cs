@@ -22,6 +22,7 @@ namespace BattleBoats.Rendering
 		// holds all of the parts we need to draw this frame
 		private List<RenderPass> imageStack;
 
+		// current frame
 		private TextImage fbo;
 
 		public Renderer()

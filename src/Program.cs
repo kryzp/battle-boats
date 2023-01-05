@@ -125,7 +125,7 @@ namespace BattleBoats
 			SaveManager = new SaveManager();
 			Random = new Random();
 
-			// hide the cursor
+			// hide cursor
 			Console.CursorVisible = false;
 
 			// the game starts in the main menu state
