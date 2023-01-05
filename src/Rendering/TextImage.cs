@@ -49,7 +49,7 @@ namespace BattleBoats.Rendering
 
 			for (int i = 0; i < text.Length; i++)
 			{
-				this.Chars[coords.Y][coords.X + i] = new ColouredChar(text[i], col);
+				this.Chars[coords.Y][coords.X + i] = new ColouredChar(text[i], ConsoleColor.White);
 			}
 
 			return this;
