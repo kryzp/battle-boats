@@ -14,9 +14,10 @@ namespace BattleBoats.Rendering
 		public static void Write(int x, int y, char c, ConsoleColor col)
 		{
 			if (c != ' ')
+			{
 				Console.ForegroundColor = col;
-
-			Write(x, y, c);
+				Write(x, y, c);
+			}
 		}
 	}
 }
