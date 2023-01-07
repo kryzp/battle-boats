@@ -4,7 +4,7 @@ namespace BattleBoats.Rendering
 	{
 		public static void Write(int x, int y, char c)
 		{
-			if (x < 0 || x >= Program.WINDOW_WIDTH || y < 0 || y >= Program.WINDOW_HEIGHT)
+			if (x < 0 || x >= Console.BufferWidth || x >= Program.WINDOW_WIDTH || y < 0 || y >= Console.BufferHeight || y >= Program.WINDOW_HEIGHT)
 				return;
 			
 			Console.SetCursorPosition(x, y);
